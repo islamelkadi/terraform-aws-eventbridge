@@ -53,7 +53,7 @@ For full details on security profiles and how controls vary by environment, see 
 
 ```hcl
 module "s3_event_rule" {
-  source = "../../modules/terraform-aws-eventbridge/modules/rule"
+  source = "github.com/islamelkadi/terraform-aws-eventbridge//modules/rule"
 
   namespace   = "example"
   environment = "dev"
@@ -116,7 +116,7 @@ module "s3_event_rule" {
 
 ```hcl
 module "daily_batch_rule" {
-  source = "../../modules/terraform-aws-eventbridge/modules/rule"
+  source = "github.com/islamelkadi/terraform-aws-eventbridge//modules/rule"
 
   namespace   = "example"
   environment = "prod"
@@ -149,7 +149,7 @@ module "daily_batch_rule" {
 
 ```hcl
 module "multi_target_rule" {
-  source = "../../modules/terraform-aws-eventbridge/modules/rule"
+  source = "github.com/islamelkadi/terraform-aws-eventbridge//modules/rule"
 
   namespace   = "example"
   environment = "dev"
@@ -250,7 +250,7 @@ module "multi_target_rule" {
 # Basic EventBridge Rule Example
 
 module "eventbridge_rule" {
-  source = "../"
+  source = "github.com/islamelkadi/terraform-aws-eventbridge//modules/rule"
 
   namespace   = var.namespace
   environment = var.environment
