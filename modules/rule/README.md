@@ -12,6 +12,41 @@ Creates AWS EventBridge rules with targets for event-driven architectures. Suppo
 - Security controls integration
 - Consistent naming via metadata module
 
+## Security
+
+### Security Controls
+
+This module enforces security best practices:
+
+- **IAM Least Privilege**: Automatic role creation with minimal permissions
+- **Retry Policies**: Recommended for all targets to handle transient failures
+- **Dead Letter Queues**: Recommended for failed event handling
+- **CloudTrail**: Account-level logging for audit compliance
+
+### Security Control Overrides
+
+Use `security_control_overrides` to disable specific controls with justification:
+
+```hcl
+security_control_overrides = {
+  disable_retry_policy      = true
+  disable_dead_letter_queue = true
+  justification             = "Low-priority events, acceptable data loss for cost optimization"
+}
+```
+
+### Environment-Based Security Controls
+
+Security controls are automatically applied based on the environment through the [terraform-aws-metadata](https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles) module's security profiles:
+
+| Control | Dev | Staging | Prod |
+|---------|-----|---------|------|
+| IAM least privilege | Enforced | Enforced | Enforced |
+| Dead letter queue | Optional | Recommended | Required |
+| Retry policies | Optional | Recommended | Required |
+| CloudTrail logging | Optional | Required | Required |
+
+For full details on security profiles and how controls vary by environment, see the [Security Profiles](https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles) documentation.
 ## Usage
 
 ### Basic Example - S3 Event to Step Functions
@@ -150,27 +185,6 @@ module "multi_target_rule" {
 }
 ```
 
-## Security Controls
-
-This module enforces security best practices:
-
-- **IAM Least Privilege**: Automatic role creation with minimal permissions
-- **Retry Policies**: Recommended for all targets to handle transient failures
-- **Dead Letter Queues**: Recommended for failed event handling
-- **CloudTrail**: Account-level logging for audit compliance
-
-### Security Control Overrides
-
-Use `security_control_overrides` to disable specific controls with justification:
-
-```hcl
-security_control_overrides = {
-  disable_retry_policy      = true
-  disable_dead_letter_queue = true
-  justification             = "Low-priority events, acceptable data loss for cost optimization"
-}
-```
-
 ## Event Pattern Examples
 
 ### S3 Events
@@ -228,25 +242,7 @@ security_control_overrides = {
 - `rate(1 hour)` - Every hour
 - `rate(1 day)` - Daily
 
-## License
-
-Apache 2.0 Licensed. See LICENSE for full details.
-
-## Environment-Based Security Controls
-
-Security controls are automatically applied based on the environment through the [terraform-aws-metadata](https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles){:target="_blank"} module's security profiles:
-
-| Control | Dev | Staging | Prod |
-|---------|-----|---------|------|
-| IAM least privilege | Enforced | Enforced | Enforced |
-| Dead letter queue | Optional | Recommended | Required |
-| Retry policies | Optional | Recommended | Required |
-| CloudTrail logging | Optional | Required | Required |
-
-For full details on security profiles and how controls vary by environment, see the <a href="https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles" target="_blank">Security Profiles</a> documentation.
-
 <!-- BEGIN_TF_DOCS -->
-
 
 ## Usage
 
@@ -363,7 +359,3 @@ module "eventbridge_rule" {
 
 See [example/](example/) for a complete working example with all features.
 
-## License
-
-MIT Licensed. See [LICENSE](LICENSE) for full details.
-<!-- END_TF_DOCS -->
