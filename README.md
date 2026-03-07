@@ -17,37 +17,10 @@ make bootstrap
 
 This will install/upgrade: tfenv, Terraform (via tfenv), tflint, terraform-docs, checkov, and pre-commit.
 
-## Submodules
 
-| Submodule | Description |
-|-----------|-------------|
-| [rule](modules/rule/) | EventBridge rules with Step Functions and Lambda targets |
+## Security
 
-## Usage
-
-```hcl
-module "eventbridge_rule" {
-  source = "path/to/terraform-aws-eventbridge/modules/rule"
-
-  namespace   = "example"
-  environment = "prod"
-  name        = "daily-processor"
-  region      = "us-east-1"
-
-  description         = "Daily processing job triggered at 2 AM UTC"
-  schedule_expression = "cron(0 2 * * ? *)"
-  enabled             = true
-
-  step_functions_targets = [{
-    target_id         = "daily-processor-sfn"
-    state_machine_arn = var.state_machine_arn
-  }]
-
-  tags = var.tags
-}
-```
-
-## Security Controls
+### Security Controls
 
 Implements controls for FSBP, CIS, NIST 800-53/171, and PCI DSS v4.0:
 
@@ -56,6 +29,25 @@ Implements controls for FSBP, CIS, NIST 800-53/171, and PCI DSS v4.0:
 - Dead letter queue support for failed deliveries
 - CloudWatch Logs integration for monitoring
 - Security control overrides with audit justification
+
+### Environment-Based Security Controls
+
+Security controls are automatically applied based on the environment through the [terraform-aws-metadata](https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles){:target="_blank"} module's security profiles:
+
+| Control | Dev | Staging | Prod |
+|---------|-----|---------|------|
+| KMS customer-managed keys | Optional | Required | Required |
+| IAM least privilege | Enforced | Enforced | Enforced |
+| Dead letter queue | Optional | Recommended | Required |
+| CloudWatch Logs | Optional | Required | Required |
+
+For full details on security profiles and how controls vary by environment, see the <a href="https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles" target="_blank">Security Profiles</a> documentation.
+## Submodules
+
+| Submodule | Description |
+|-----------|-------------|
+| [rule](modules/rule/) | EventBridge rules with Step Functions and Lambda targets |
+
 
 ## Module Structure
 
@@ -79,18 +71,6 @@ terraform-aws-eventbridge/
 | terraform | >= 1.14.3 |
 | aws | >= 6.34 |
 
-## Environment-Based Security Controls
-
-Security controls are automatically applied based on the environment through the [terraform-aws-metadata](https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles){:target="_blank"} module's security profiles:
-
-| Control | Dev | Staging | Prod |
-|---------|-----|---------|------|
-| KMS customer-managed keys | Optional | Required | Required |
-| IAM least privilege | Enforced | Enforced | Enforced |
-| Dead letter queue | Optional | Recommended | Required |
-| CloudWatch Logs | Optional | Required | Required |
-
-For full details on security profiles and how controls vary by environment, see the <a href="https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles" target="_blank">Security Profiles</a> documentation.
 
 ## MCP Servers
 
