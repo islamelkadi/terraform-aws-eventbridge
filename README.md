@@ -1,5 +1,9 @@
 # Terraform AWS EventBridge Module
 
+[![Terraform Security](https://github.com/islamelkadi/terraform-aws-eventbridge/actions/workflows/terraform-security.yaml/badge.svg)](https://github.com/islamelkadi/terraform-aws-eventbridge/actions/workflows/terraform-security.yaml)
+[![Terraform Lint & Validation](https://github.com/islamelkadi/terraform-aws-eventbridge/actions/workflows/terraform-lint.yaml/badge.svg)](https://github.com/islamelkadi/terraform-aws-eventbridge/actions/workflows/terraform-lint.yaml)
+[![Terraform Docs](https://github.com/islamelkadi/terraform-aws-eventbridge/actions/workflows/terraform-docs.yaml/badge.svg)](https://github.com/islamelkadi/terraform-aws-eventbridge/actions/workflows/terraform-docs.yaml)
+
 Reusable Terraform module for AWS EventBridge rules and targets.
 
 ## Prerequisites
