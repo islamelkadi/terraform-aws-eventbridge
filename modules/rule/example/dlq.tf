@@ -36,7 +36,7 @@ module "dead_letter_queue" {
 
   kms_master_key_id = module.kms_key.key_id
 
-  message_retention_seconds = 1209600  # 14 days
+  message_retention_seconds = 1209600 # 14 days
 
   tags = {
     Purpose = "example-supporting-infrastructure"
