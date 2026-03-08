@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 1.0"
+}
+
 # Primary Module Example - This demonstrates the terraform-aws-eventbridge rule module
 # Supporting infrastructure (DLQ) is defined in separate files
 # to keep this example focused on the module's core functionality.

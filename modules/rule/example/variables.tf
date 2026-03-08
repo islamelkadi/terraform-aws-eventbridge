@@ -46,12 +46,6 @@ variable "state_machine_arn" {
   default     = "arn:aws:states:us-east-1:123456789012:stateMachine:daily-processor"
 }
 
-variable "dead_letter_arn" {
-  description = "ARN of the SQS dead letter queue"
-  type        = string
-  default     = "arn:aws:sqs:us-east-1:123456789012:eventbridge-dlq"
-}
-
 variable "tags" {
   description = "Additional tags"
   type        = map(string)
