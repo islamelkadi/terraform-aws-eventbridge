@@ -34,7 +34,7 @@ module "dead_letter_queue" {
   name        = "example-dlq"
   region      = var.region
 
-  kms_master_key_id = module.kms_key.key_id
+  kms_key_arn = module.kms_key.key_arn
 
   message_retention_seconds = 1209600 # 14 days
 
