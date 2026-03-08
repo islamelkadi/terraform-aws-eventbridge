@@ -244,13 +244,22 @@ module "multi_target_rule" {
 
 <!-- BEGIN_TF_DOCS -->
 
+
 ## Usage
 
 ```hcl
+terraform {
+  required_version = ">= 1.0"
+}
+
+# Primary Module Example - This demonstrates the terraform-aws-eventbridge rule module
+# Supporting infrastructure (DLQ) is defined in separate files
+# to keep this example focused on the module's core functionality.
+#
 # Basic EventBridge Rule Example
 
 module "eventbridge_rule" {
-  source = "github.com/islamelkadi/terraform-aws-eventbridge//modules/rule"
+  source = "../"
 
   namespace   = var.namespace
   environment = var.environment
@@ -282,7 +291,8 @@ module "eventbridge_rule" {
       maximum_retry_attempts = 2
     }
 
-    dead_letter_arn = var.dead_letter_arn
+    # Direct reference to dlq.tf module output
+    dead_letter_arn = module.dead_letter_queue.queue_arn
   }]
 
   tags = var.tags
@@ -306,7 +316,7 @@ module "eventbridge_rule" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_metadata"></a> [metadata](#module\_metadata) | github.com/islamelkadi/terraform-aws-metadata | v1.1.0 |
+| <a name="module_metadata"></a> [metadata](#module\_metadata) | github.com/islamelkadi/terraform-aws-metadata | v1.0.0 |
 
 ## Resources
 
@@ -359,3 +369,7 @@ module "eventbridge_rule" {
 
 See [example/](example/) for a complete working example with all features.
 
+## License
+
+MIT Licensed. See [LICENSE](LICENSE) for full details.
+<!-- END_TF_DOCS -->
