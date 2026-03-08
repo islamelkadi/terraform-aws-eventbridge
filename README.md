@@ -82,6 +82,7 @@ Both servers run via `uvx` and require no additional installation beyond the [bo
 
 <!-- BEGIN_TF_DOCS -->
 
+
 ## Requirements
 
 No requirements.
@@ -106,3 +107,7 @@ No inputs.
 
 No outputs.
 
+## License
+
+MIT Licensed. See [LICENSE](LICENSE) for full details.
+<!-- END_TF_DOCS -->
