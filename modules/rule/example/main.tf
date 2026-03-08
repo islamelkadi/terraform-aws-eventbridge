@@ -1,3 +1,7 @@
+# Primary Module Example - This demonstrates the terraform-aws-eventbridge rule module
+# Supporting infrastructure (DLQ) is defined in separate files
+# to keep this example focused on the module's core functionality.
+#
 # Basic EventBridge Rule Example
 
 module "eventbridge_rule" {
@@ -33,7 +37,8 @@ module "eventbridge_rule" {
       maximum_retry_attempts = 2
     }
 
-    dead_letter_arn = var.dead_letter_arn
+    # Direct reference to dlq.tf module output
+    dead_letter_arn = module.dead_letter_queue.queue_arn
   }]
 
   tags = var.tags
