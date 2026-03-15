@@ -1,3 +1,16 @@
+## [1.1.0](https://github.com/islamelkadi/terraform-aws-eventbridge/compare/v1.0.2...v1.1.0) (2026-03-15)
+
+
+### Features
+
+* add manual triggering to release workflow ([59c1af1](https://github.com/islamelkadi/terraform-aws-eventbridge/commit/59c1af1fa1c6228e09812e0fa3958a20443af86b))
+
+
+### Documentation
+
+* add GitHub Actions workflow status badges ([77a90e2](https://github.com/islamelkadi/terraform-aws-eventbridge/commit/77a90e295efa144ef5a41a10454c68d3287c5595))
+* add security scan suppressions section to README ([e6d57b1](https://github.com/islamelkadi/terraform-aws-eventbridge/commit/e6d57b1bf3c0e25c2b051dccf2b4b02c02f90690))
+
 ## [1.0.2](https://github.com/islamelkadi/terraform-aws-eventbridge/compare/v1.0.1...v1.0.2) (2026-03-08)
 
 
